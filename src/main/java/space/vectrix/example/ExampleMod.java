@@ -36,26 +36,26 @@ import space.vectrix.ignite.api.event.Subscribe;
 import space.vectrix.ignite.api.event.platform.PlatformInitializeEvent;
 
 public final class ExampleMod {
-  private final Logger logger;
-  private final Platform platform;
+    private final Logger logger;
+    private final Platform platform;
 
-  @Inject
-  public ExampleMod(final Logger logger,
-                    final Platform platform) {
-    this.logger = logger;
-    this.platform = platform;
-  }
-
-  @Subscribe
-  public void onInitialize(final @NonNull PlatformInitializeEvent event) throws ConfigurateException {
-    this.logger.info("Hello Example!");
-
-    final Configuration<ExampleConfig, CommentedConfigurationNode> configWrapper = Configurations.getOrCreate(Configurations.HOCON_LOADER, ExampleInfo.getExampleConfig());
-    // Configファイルを生成しておく
-    configWrapper.save();
-    final ExampleConfig config = configWrapper.instance();
-    if (config != null) {
-      this.logger.info("Foo is set to: " + (config.container().foo() ? "Enabled" : "Disabled"));
+    @Inject
+    public ExampleMod(final Logger logger,
+                      final Platform platform) {
+        this.logger = logger;
+        this.platform = platform;
     }
-  }
+
+    @Subscribe
+    public void onInitialize(final @NonNull PlatformInitializeEvent event) throws ConfigurateException {
+        this.logger.info("Hello Example!");
+
+        final Configuration<ExampleConfig, CommentedConfigurationNode> configWrapper = Configurations.getOrCreate(Configurations.HOCON_LOADER, ExampleInfo.getExampleConfig());
+        // Configファイルを生成しておく
+        configWrapper.save();
+        final ExampleConfig config = configWrapper.instance();
+        if (config != null) {
+            this.logger.info("Foo is set to: " + (config.container().foo() ? "Enabled" : "Disabled"));
+        }
+    }
 }

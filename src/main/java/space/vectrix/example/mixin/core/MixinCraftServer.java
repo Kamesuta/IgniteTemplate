@@ -34,10 +34,11 @@ import java.util.logging.Logger;
 
 @Mixin(targets = "org.bukkit.craftbukkit.v1_16_R3.CraftServer", remap = false)
 public abstract class MixinCraftServer {
-  @Shadow public abstract Logger getLogger();
+    @Shadow
+    public abstract Logger getLogger();
 
-  @Inject(method = "<init>", at = @At("RETURN"))
-  private void onConstruction(CallbackInfo callback) {
-    this.getLogger().info("Hello World!");
-  }
+    @Inject(method = "<init>", at = @At("RETURN"))
+    private void onConstruction(CallbackInfo callback) {
+        this.getLogger().info("Hello World!");
+    }
 }
