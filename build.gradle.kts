@@ -2,6 +2,10 @@ plugins {
     java
 }
 
+// グループ定義
+group = "space.vectrix.example"
+version = "1.0-SNAPSHOT"
+
 java {
     // Javaのバージョンを指定
     sourceCompatibility = JavaVersion.VERSION_1_8
