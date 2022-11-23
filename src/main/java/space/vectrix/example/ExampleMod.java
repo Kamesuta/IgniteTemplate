@@ -28,6 +28,7 @@ import com.google.inject.Inject;
 import org.apache.logging.log4j.Logger;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.CommentedConfigurationNode;
+import org.spongepowered.configurate.ConfigurateException;
 import space.vectrix.ignite.api.Platform;
 import space.vectrix.ignite.api.config.Configuration;
 import space.vectrix.ignite.api.config.Configurations;
@@ -46,10 +47,12 @@ public final class ExampleMod {
   }
 
   @Subscribe
-  public void onInitialize(final @NonNull PlatformInitializeEvent event) {
+  public void onInitialize(final @NonNull PlatformInitializeEvent event) throws ConfigurateException {
     this.logger.info("Hello Example!");
 
     final Configuration<ExampleConfig, CommentedConfigurationNode> configWrapper = Configurations.getOrCreate(Configurations.HOCON_LOADER, ExampleInfo.getExampleConfig());
+    // Configファイルを生成しておく
+    configWrapper.save();
     final ExampleConfig config = configWrapper.instance();
     if (config != null) {
       this.logger.info("Foo is set to: " + (config.container().foo() ? "Enabled" : "Disabled"));

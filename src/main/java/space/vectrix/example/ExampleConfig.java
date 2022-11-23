@@ -32,7 +32,7 @@ import org.spongepowered.configurate.objectmapping.meta.Setting;
 public final class ExampleConfig {
   @Setting(value = "test")
   @Comment(value = "Test configuration property.")
-  private boolean test;
+  private boolean test = true;
 
   @Setting(value = "container")
   @Comment(value = "A test container.")
